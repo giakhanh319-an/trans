@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function translateText(text, context, mode, apiKey, targetLanguage) {
         // API Endpoint for Gemini 1.5 Flash (fast and high quality)
-        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
 
         let systemInstruction = `Bạn là một chuyên gia dịch thuật cao cấp từ Tiếng Việt sang ${targetLanguage}. 
 Nhiệm vụ của bạn là dịch chính xác theo ngữ cảnh/chuyên ngành: [${context}]. 
