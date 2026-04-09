@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProTrans | Dịch thuật Chuyên ngành Việt - Trung</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header glass-panel">
+            <div class="logo">
+                <i class="ph-fill ph-translate"></i>
+                <h1>ProTrans <span>Đa Ngữ</span></h1>
+            </div>
+            <div class="settings-toggle">
+                <button id="btnSettings" class="icon-btn" title="Cài đặt API"><i class="ph ph-gear"></i></button>
+            </div>
+        </header>
+
+        <!-- Settings Panel -->
+        <div id="settingsPanel" class="settings-panel glass-panel hidden">
+            <div class="setting-group">
+                <label for="apiKey"><i class="ph ph-key"></i> Google Gemini API Key</label>
+                <div class="input-wrapper">
+                    <input type="password" id="apiKey" placeholder="Nhập API Key của bạn...">
+                    <button id="btnSaveKey" class="btn-primary small">Lưu</button>
+                </div>
+                <small>API Key được lưu trữ cục bộ trên máy của bạn, đảm bảo an toàn tuyệt đối. <a href="https://aistudio.google.com/app/apikey" target="_blank">Lấy API Key tại đây</a>.</small>
+            </div>
+        </div>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Controls Bar -->
+            <div class="controls-bar glass-panel">
+                <div class="control-group">
+                    <label for="targetLang"><i class="ph ph-globe"></i> Ngôn ngữ đích</label>
+                    <select id="targetLang" class="custom-select">
+                        <option value="Tiếng Trung">Tiếng Trung</option>
+                        <option value="Tiếng Anh">Tiếng Anh</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="context"><i class="ph ph-book-open"></i> Ngữ cảnh</label>
+                    <input type="text" id="context" placeholder="VD: Giáo dục, CNTT..." value="Giáo dục, Công nghệ">
+                </div>
+                
+                <div class="control-group">
+                    <label><i class="ph ph-list-dashes"></i> Chế độ xuất</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="translationMode" value="monolingual" checked>
+                            <span class="radio-custom">Đơn ngữ</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="translationMode" value="bilingual">
+                            <span class="radio-custom">Song ngữ</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="editor-area">
+                <!-- Source Input -->
+                <div class="editor-panel source-panel glass-panel">
+                    <div class="panel-header">
+                        <h2><i class="ph ph-flag"></i> Tiếng Việt</h2>
+                        <div class="header-actions">
+                            <input type="file" id="fileInput" accept=".txt" style="display: none;">
+                            <button id="btnUpload" class="icon-btn" title="Tải file lên (TXT)"><i class="ph ph-upload-simple"></i></button>
+                            <button id="btnClear" class="icon-btn" title="Xóa văn bản"><i class="ph ph-trash"></i></button>
+                        </div>
+                    </div>
+                    <textarea id="sourceText" placeholder="Nhập hoặc dán văn bản tiếng Việt cần dịch vào đây..."></textarea>
+                    
+                    <div class="action-footer">
+                        <button id="btnTranslate" class="btn-primary large">
+                            <i class="ph ph-magic-wand"></i> Dịch ngay
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Target Output -->
+                <div class="editor-panel target-panel glass-panel">
+                    <div class="panel-header">
+                        <h2><i class="ph ph-flag"></i> <span id="targetLangLabel">Tiếng Trung</span> <span id="modeIndicator">(Đơn ngữ)</span></h2>
+                        <div class="header-actions">
+                            <button id="btnDownload" class="icon-btn" title="Tải file kết quả (TXT)"><i class="ph ph-download-simple"></i></button>
+                            <button id="btnCopy" class="icon-btn" title="Sao chép kết quả"><i class="ph ph-copy"></i></button>
+                        </div>
+                    </div>
+                    <div id="targetText" class="output-content" placeholder="Bản dịch sẽ xuất hiện ở đây..."></div>
+                    
+                    <!-- Loading Overlay -->
+                    <div id="loadingOverlay" class="loading-overlay">
+                        <div class="spinner"></div>
+                        <p>Đang phân tích và dịch thuật chuyên sâu...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
